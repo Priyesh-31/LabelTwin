@@ -1,0 +1,17 @@
+services:
+  mongodb:
+    image: mongo:7
+    ports: ["27017:27017"]
+    volumes: ["labeltwin-data:/data/db"]
+  vision:
+    build: ./vision
+    ports: ["8000:8000"]
+  api:
+    build: ./server
+    environment:
+      MONGODB_URI: mongodb://mongodb:27017/labeltwin
+      VISION_SERVICE_URL: http://vision:8000
+    ports: ["5000:5000"]
+    depends_on: [mongodb, vision]
+volumes:
+  labeltwin-data:

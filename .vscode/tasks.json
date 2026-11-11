@@ -1,0 +1,41 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Run LabelTwin web and API",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"dev"
+			],
+			"isBackground": true
+		},
+		{
+			"label": "Run LabelTwin vision gate",
+			"type": "shell",
+			"command": "C:\\Users\\priye\\Desktop\\DIP-Project\\.venv\\Scripts\\python.exe",
+			"args": [
+				"-m",
+				"uvicorn",
+				"app.main:app",
+				"--host",
+				"127.0.0.1",
+				"--port",
+				"8000"
+			],
+			"isBackground": true
+		},
+		{
+			"label": "Run LabelTwin vision gate (fixed)",
+			"type": "shell",
+			"command": "powershell.exe",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"Set-Location 'C:\\Users\\priye\\Desktop\\DIP-Project\\vision'; & 'C:\\Users\\priye\\Desktop\\DIP-Project\\.venv\\Scripts\\python.exe' -m uvicorn app.main:app --host 127.0.0.1 --port 8000"
+			],
+			"isBackground": true
+		}
+	]
+}
