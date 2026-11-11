@@ -3,9 +3,14 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "install:all": "npm install --prefix server && npm install --prefix client",
-    "dev": "concurrently \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
-    "start": "npm start --prefix server"
+    "install:all": "npm install && npm install --prefix backend/api && npm install --prefix frontend && python -m pip install -r backend/vision/requirements.txt",
+    "dev": "concurrently --names vision,api,frontend --prefix-colors magenta,cyan,green \"npm run dev:vision\" \"npm run dev --prefix backend/api\" \"npm run dev --prefix frontend\"",
+    "dev:api": "npm run dev --prefix backend/api",
+    "dev:frontend": "npm run dev --prefix frontend",
+    "dev:vision": "python -m uvicorn app.main:app --app-dir backend/vision --host 127.0.0.1 --port 8000 --reload",
+    "start": "npm start --prefix backend/api",
+    "test": "npm test --prefix backend/api",
+    "build": "npm run build --prefix frontend"
   },
   "devDependencies": { "concurrently": "^9.1.2" }
 }
